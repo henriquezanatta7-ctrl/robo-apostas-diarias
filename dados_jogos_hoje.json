@@ -1,46 +1,46 @@
 [
   {
-    "jogo": "Flamengo vs Fluminense",
+    "jogo": "Flamengo vs Palmeiras",
     "liga": "Brasileirão Série A",
-    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
-    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
-    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "clima_e_gramado": "Condições normais de jogo.",
+    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
+    "historico_e_momento": "Confronto equilibrado entre as equipes.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
   },
   {
-    "jogo": "Palmeiras vs São Paulo",
+    "jogo": "São Paulo vs Corinthians",
     "liga": "Brasileirão Série A",
-    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
-    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
-    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "clima_e_gramado": "Condições normais de jogo.",
+    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
+    "historico_e_momento": "Confronto equilibrado entre as equipes.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
   },
   {
-    "jogo": "Botafogo vs Vasco",
+    "jogo": "Atlético-MG vs Cruzeiro",
     "liga": "Brasileirão Série A",
-    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
-    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
-    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "clima_e_gramado": "Condições normais de jogo.",
+    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
+    "historico_e_momento": "Confronto equilibrado entre as equipes.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
   },
   {
     "jogo": "Real Madrid vs Barcelona",
     "liga": "El Clásico",
-    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
-    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
-    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "clima_e_gramado": "Condições normais de jogo.",
+    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
+    "historico_e_momento": "Confronto equilibrado entre as equipes.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
   }
 ]
