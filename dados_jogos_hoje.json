@@ -1,46 +1,57 @@
 [
   {
-    "jogo": "Flamengo vs Palmeiras",
+    "jogo": "Flamengo vs Internacional",
     "liga": "Brasileirão Série A",
-    "clima_e_gramado": "Condições normais de jogo.",
-    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
-    "historico_e_momento": "Confronto equilibrado entre as equipes.",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições para o confronto.",
+    "desfalques_e_escalacao": "Força máxima disponível para a partida de hoje.",
+    "historico_e_momento": "Confronto direto muito equilibrado na tabela.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
+    "resumo_analise": "Expectativa de jogo aberto com chances claras de gol para os dois lados."
   },
   {
-    "jogo": "São Paulo vs Corinthians",
+    "jogo": "Palmeiras vs Atlético-MG",
     "liga": "Brasileirão Série A",
-    "clima_e_gramado": "Condições normais de jogo.",
-    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
-    "historico_e_momento": "Confronto equilibrado entre as equipes.",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições para o confronto.",
+    "desfalques_e_escalacao": "Força máxima disponível para a partida de hoje.",
+    "historico_e_momento": "Confronto direto muito equilibrado na tabela.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
+    "resumo_analise": "Expectativa de jogo aberto com chances claras de gol para os dois lados."
   },
   {
-    "jogo": "Atlético-MG vs Cruzeiro",
+    "jogo": "São Paulo vs Botafogo",
     "liga": "Brasileirão Série A",
-    "clima_e_gramado": "Condições normais de jogo.",
-    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
-    "historico_e_momento": "Confronto equilibrado entre as equipes.",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições para o confronto.",
+    "desfalques_e_escalacao": "Força máxima disponível para a partida de hoje.",
+    "historico_e_momento": "Confronto direto muito equilibrado na tabela.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
+    "resumo_analise": "Expectativa de jogo aberto com chances claras de gol para os dois lados."
   },
   {
-    "jogo": "Real Madrid vs Barcelona",
-    "liga": "El Clásico",
-    "clima_e_gramado": "Condições normais de jogo.",
-    "desfalques_e_escalacao": "Equipes com escalações principais confirmadas.",
-    "historico_e_momento": "Confronto equilibrado entre as equipes.",
+    "jogo": "Fluminense vs Grêmio",
+    "liga": "Brasileirão Série A",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições para o confronto.",
+    "desfalques_e_escalacao": "Força máxima disponível para a partida de hoje.",
+    "historico_e_momento": "Confronto direto muito equilibrado na tabela.",
     "palpite_recomendado": "Ambas Marcam - Sim",
     "odd_estimada": "1.80",
     "nivel_confianca": "Alta",
-    "resumo_analise": "Partida movimentada com alta expectativa de oportunidades de gol para ambos os lados."
+    "resumo_analise": "Expectativa de jogo aberto com chances claras de gol para os dois lados."
+  },
+  {
+    "jogo": "Boca Juniors vs River Plate",
+    "liga": "Campeonato Argentino",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições para o confronto.",
+    "desfalques_e_escalacao": "Força máxima disponível para a partida de hoje.",
+    "historico_e_momento": "Confronto direto muito equilibrado na tabela.",
+    "palpite_recomendado": "Ambas Marcam - Sim",
+    "odd_estimada": "1.80",
+    "nivel_confianca": "Alta",
+    "resumo_analise": "Expectativa de jogo aberto com chances claras de gol para os dois lados."
   }
 ]
