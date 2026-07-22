@@ -3,32 +3,46 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Análises & Gestão de Apostas | IA Esportiva</title>
+  <title>Analista AI Pro | Gestão & Palpites Esportivos</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
-    .card-glass { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
+    body { 
+      background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
+      color: #f8fafc; 
+      font-family: 'Inter', sans-serif; 
+      min-height: 100vh;
+    }
+    .card-glass { 
+      background: rgba(30, 41, 59, 0.75); 
+      backdrop-filter: blur(16px); 
+      border: 1px solid rgba(255, 255, 255, 0.08); 
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+    }
+    .accent-gradient {
+      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+    }
   </style>
 </head>
-<body class="min-h-screen pb-12">
+<body class="pb-16">
 
-  <!-- Header -->
-  <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md px-4 py-4">
+  <!-- Header Topo -->
+  <header class="border-b border-slate-700/50 bg-slate-900/90 sticky top-0 z-50 backdrop-blur-md px-4 py-4">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="bg-emerald-500 p-2 rounded-xl text-slate-950 font-bold">
-          <i class="fa-solid fa-brain text-xl"></i>
+        <div class="accent-gradient p-2.5 rounded-xl text-slate-950 font-black shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-chart-line text-xl"></i>
         </div>
         <div>
-          <h1 class="font-bold text-lg leading-tight">Analista AI <span class="text-emerald-400">Pro</span></h1>
-          <p class="text-xs text-slate-400">Gestão Interativa & Análises Profundas</p>
+          <h1 class="font-extrabold text-xl tracking-tight leading-tight text-white">Analista AI <span class="text-amber-400">Pro</span></h1>
+          <p class="text-xs text-slate-400 font-medium">Análises de Precisão & Gestão de Stake</p>
         </div>
       </div>
-      <div class="text-right">
-        <span class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/20 font-medium">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Ao Vivo
+      <div>
+        <span class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1.5 rounded-full border border-emerald-500/30 font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          Jogos de Hoje
         </span>
       </div>
     </div>
@@ -36,42 +50,42 @@
 
   <main class="max-w-5xl mx-auto px-4 mt-6">
     
-    <!-- CALCULADORA INTERATIVA DE BANCA -->
-    <div class="card-glass p-6 rounded-2xl mb-8 border-emerald-500/30">
+    <!-- CALCULADORA DE BANCA -->
+    <div class="card-glass p-6 rounded-2xl mb-8 border-amber-500/30">
       <div class="flex items-center gap-2 mb-4">
-        <i class="fa-solid fa-calculator text-emerald-400 text-lg"></i>
-        <h2 class="text-base font-bold text-white">Calculadora Personalizada de Banca</h2>
+        <i class="fa-solid fa-calculator text-amber-400 text-lg"></i>
+        <h2 class="text-base font-bold text-white uppercase tracking-wider">Calculadora Inteligente de Stake</h2>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
           <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Banca Atual (R$)</label>
-          <input type="number" id="input-banca" value="500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white font-bold text-lg focus:outline-none focus:border-emerald-500" oninput="recalcularStakes()">
+          <input type="number" id="input-banca" value="500" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-4 py-2.5 text-white font-bold text-lg focus:outline-none focus:border-amber-400 transition" oninput="recalcularStakes()">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Meta Desejada (R$)</label>
-          <input type="number" id="input-meta" value="1500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-emerald-400 font-bold text-lg focus:outline-none focus:border-emerald-500" oninput="recalcularStakes()">
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Meta do Dia (R$)</label>
+          <input type="number" id="input-meta" value="1000" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-4 py-2.5 text-amber-400 font-bold text-lg focus:outline-none focus:border-amber-400 transition" oninput="recalcularStakes()">
         </div>
-        <div class="flex flex-col justify-center bg-slate-900/60 p-3 rounded-xl border border-slate-800">
-          <span class="text-xs text-slate-400">Lucro Almejado</span>
-          <span id="label-lucro" class="text-xl font-black text-emerald-400">R$ 1.000,00</span>
+        <div class="flex flex-col justify-center bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+          <span class="text-xs text-slate-400 font-medium">Meta de Lucro</span>
+          <span id="label-lucro" class="text-2xl font-black text-emerald-400">R$ 500,00</span>
         </div>
       </div>
     </div>
 
     <!-- Título Seção -->
     <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl font-bold flex items-center gap-2">
-        <i class="fa-solid fa-fire text-amber-500"></i>
-        Análises do Dia
+      <h2 class="text-xl font-black text-white flex items-center gap-2">
+        <i class="fa-solid fa-fire text-amber-500 animate-bounce"></i>
+        Análises da Rodada
       </h2>
     </div>
 
     <!-- Container dos Jogos -->
     <div id="jogos-container" class="grid grid-cols-1 gap-6">
       <div class="text-center py-12 text-slate-400 card-glass rounded-2xl">
-        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-emerald-400 mb-3"></i>
-        <p>Carregando análises do robô...</p>
+        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-amber-400 mb-3"></i>
+        <p>Buscando os palpites de hoje...</p>
       </div>
     </div>
   </main>
@@ -81,36 +95,22 @@
 
     async function carregarAnalises() {
       const container = document.getElementById('jogos-container');
-      
-      // Múltiplas fontes de redundância para que o navegador consiga ler o JSON no celular sem bloqueio CORS
-      const endpoints = [
-        './dados_jogos_hoje.json?t=' + Date.now(),
-        'dados_jogos_hoje.json?t=' + Date.now()
-      ];
-
-      let dadosCarregados = null;
-
-      for (let url of endpoints) {
-        try {
-          const res = await fetch(url);
-          if (res.ok) {
-            dadosCarregados = await res.json();
-            if (dadosCarregados && dadosCarregados.length > 0) break;
-          }
-        } catch (e) {
-          console.error("Erro ao tentar URL:", url);
+      try {
+        const res = await fetch('dados_jogos_hoje.json?v=' + Date.now());
+        if (!res.ok) throw new Error();
+        jogosGlobais = await res.json();
+        
+        if (!jogosGlobais || jogosGlobais.length === 0) {
+          container.innerHTML = `<div class="card-glass p-8 rounded-2xl text-center text-slate-400">Aguardando atualizações do robô.</div>`;
+          return;
         }
-      }
-
-      if (dadosCarregados && dadosCarregados.length > 0) {
-        jogosGlobais = dadosCarregados;
         renderizarJogos();
-      } else {
+      } catch (e) {
         container.innerHTML = `
           <div class="card-glass p-8 rounded-2xl text-center">
-            <i class="fa-solid fa-clock-rotate-left text-emerald-400 text-3xl mb-3"></i>
-            <p class="text-slate-200 font-bold text-base">O robô está finalizando as análises de hoje!</p>
-            <p class="text-xs text-slate-400 mt-2">Clique no botão da aba <b>Actions -> Run workflow</b> no seu GitHub para gerar as análises deste repositório agora mesmo.</p>
+            <i class="fa-solid fa-clock text-amber-400 text-3xl mb-3"></i>
+            <p class="text-slate-200 font-bold">O robô está processando as análises de hoje.</p>
+            <p class="text-xs text-slate-400 mt-1">Atualize a página em instantes.</p>
           </div>
         `;
       }
@@ -120,7 +120,6 @@
       const banca = parseFloat(document.getElementById('input-banca').value) || 0;
       const meta = parseFloat(document.getElementById('input-meta').value) || 0;
       const lucro = meta - banca;
-      
       document.getElementById('label-lucro').innerText = 'R$ ' + (lucro > 0 ? lucro : 0).toFixed(2);
       renderizarJogos();
     }
@@ -131,60 +130,60 @@
       container.innerHTML = '';
 
       jogosGlobais.forEach((j) => {
-        let percentual = j.nivel_confianca === 'Alta' ? 0.12 : (j.nivel_confianca === 'Muito Alto' ? 0.15 : 0.08);
+        let percentual = j.nivel_confianca === 'Alta' ? 0.10 : 0.05;
         let stakeCalculada = (banca * percentual).toFixed(2);
 
         const cardHtml = `
-          <div class="card-glass rounded-2xl p-6 transition-all duration-300 hover:border-slate-700">
-            <div class="flex flex-wrap justify-between items-start gap-2 border-b border-slate-800 pb-4 mb-4">
+          <div class="card-glass rounded-2xl p-6 hover:border-amber-500/40 transition duration-300">
+            <div class="flex flex-wrap justify-between items-start gap-2 border-b border-slate-700/60 pb-4 mb-4">
               <div>
-                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
                   ${j.liga || 'Futebol'}
                 </span>
                 <h3 class="text-xl font-black text-white mt-2">${j.jogo}</h3>
               </div>
               <div class="text-right">
-                <span class="text-xs text-slate-400 block">Confiança</span>
-                <span class="text-sm font-bold text-amber-400">${j.nivel_confianca || 'Alta'}</span>
+                <span class="text-xs text-slate-400 block font-medium">Confiança</span>
+                <span class="text-sm font-black text-emerald-400">${j.nivel_confianca || 'Alta'}</span>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 mb-6">
-              <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                <p class="font-bold text-slate-200 mb-1 flex items-center gap-2">
-                  <i class="fa-solid fa-cloud-showers-heavy text-blue-400"></i> Clima & Gramado
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 mb-5">
+              <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800">
+                <p class="font-bold text-amber-400 mb-1 text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fa-solid fa-cloud-sun-rain"></i> Clima & Gramado
                 </p>
-                <p class="text-xs text-slate-400 leading-relaxed">${j.clima_e_gramado || 'Condições normais'}</p>
+                <p class="text-xs text-slate-300 leading-relaxed">${j.clima_e_gramado}</p>
               </div>
               
-              <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                <p class="font-bold text-slate-200 mb-1 flex items-center gap-2">
-                  <i class="fa-solid fa-user-xmark text-rose-400"></i> Desfalques & Tática
+              <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800">
+                <p class="font-bold text-amber-400 mb-1 text-xs uppercase tracking-wider flex items-center gap-1.5">
+                  <i class="fa-solid fa-users-slash"></i> Desfalques & Tática
                 </p>
-                <p class="text-xs text-slate-400 leading-relaxed">${j.desfalques_e_escalacao || 'Sem desfalques graves'}</p>
+                <p class="text-xs text-slate-300 leading-relaxed">${j.desfalques_e_escalacao}</p>
               </div>
             </div>
 
-            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800/80 mb-6">
-              <p class="text-xs font-bold text-slate-300 mb-1">
-                <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mr-1"></i> Parecer do Analista AI:
+            <div class="bg-slate-950/30 p-4 rounded-xl border border-slate-800/80 mb-5">
+              <p class="text-xs font-bold text-slate-300 mb-1 flex items-center gap-1.5">
+                <i class="fa-solid fa-robot text-amber-400"></i> Parecer do Analista AI:
               </p>
-              <p class="text-xs text-slate-400 leading-relaxed">${j.resumo_analise || j.historico_e_momento}</p>
+              <p class="text-xs text-slate-400 leading-relaxed">${j.resumo_analise}</p>
             </div>
 
-            <div class="bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/30 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-950 border border-amber-500/40 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4">
               <div>
-                <span class="text-xs text-emerald-400 font-semibold block uppercase">Palpite Recomendado</span>
+                <span class="text-[10px] text-amber-400 font-bold block uppercase tracking-wider">Palpite Recomendado</span>
                 <span class="text-lg font-black text-white">${j.palpite_recomendado}</span>
               </div>
               <div class="flex items-center gap-4">
                 <div class="text-right">
-                  <span class="text-xs text-slate-400 block">Odd Est.</span>
-                  <span class="text-base font-bold text-emerald-400">${j.odd_estimada || '1.80'}</span>
+                  <span class="text-[10px] text-slate-400 block font-medium">Odd Est.</span>
+                  <span class="text-base font-black text-amber-400">${j.odd_estimada || '1.80'}</span>
                 </div>
                 <div class="text-right border-l border-slate-800 pl-4">
-                  <span class="text-xs text-slate-400 block">Entrada Sugerida</span>
-                  <span class="text-base font-bold text-white">R$ ${stakeCalculada}</span>
+                  <span class="text-[10px] text-slate-400 block font-medium">Entrada Sugerida</span>
+                  <span class="text-base font-black text-emerald-400">R$ ${stakeCalculada}</span>
                 </div>
               </div>
             </div>
