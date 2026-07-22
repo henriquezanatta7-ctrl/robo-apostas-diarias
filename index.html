@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Análises & Palpites Diários | IA Esportiva</title>
-  <!-- Tailwind CSS para design moderno -->
+  <title>Análises & Gestão de Apostas | IA Esportiva</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Ícones FontAwesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     body { background-color: #0f172a; color: #f8fafc; font-family: system-ui, -apple-system, sans-serif; }
@@ -15,7 +13,7 @@
 </head>
 <body class="min-h-screen pb-12">
 
-  <!-- Header / Topo -->
+  <!-- Header -->
   <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md px-4 py-4">
     <div class="max-w-5xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
@@ -24,35 +22,40 @@
         </div>
         <div>
           <h1 class="font-bold text-lg leading-tight">Analista AI <span class="text-emerald-400">Pro</span></h1>
-          <p class="text-xs text-slate-400">Análises profundas & Gestão de Banca</p>
+          <p class="text-xs text-slate-400">Gestão Interativa & Análises Profundas</p>
         </div>
       </div>
       <div class="text-right">
         <span class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1 rounded-full border border-emerald-500/20 font-medium">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          Atualizado Hoje
+          Ao Vivo
         </span>
       </div>
     </div>
   </header>
 
-  <!-- Banner / Resumo de Banca -->
   <main class="max-w-5xl mx-auto px-4 mt-6">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-      <div class="card-glass p-5 rounded-2xl">
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Banca Inicial Recom.</p>
-        <p class="text-2xl font-black text-white mt-1">R$ 550,00</p>
-        <p class="text-xs text-slate-400 mt-2">Modelo de Alavancagem Tática</p>
+    
+    <!-- CALCULADORA INTERATIVA DE BANCA -->
+    <div class="card-glass p-6 rounded-2xl mb-8 border-emerald-500/30">
+      <div class="flex items-center gap-2 mb-4">
+        <i class="fa-solid fa-calculator text-emerald-400 text-lg"></i>
+        <h2 class="text-base font-bold text-white">Calculadora Personalizada de Banca</h2>
       </div>
-      <div class="card-glass p-5 rounded-2xl border-emerald-500/30">
-        <p class="text-xs font-semibold text-emerald-400 uppercase tracking-wider">Meta do Dia</p>
-        <p class="text-2xl font-black text-emerald-400 mt-1">R$ 1.700,00</p>
-        <p class="text-xs text-emerald-500/80 mt-2">Objetivo: + R$ 1.150,00</p>
-      </div>
-      <div class="card-glass p-5 rounded-2xl">
-        <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Metodologia</p>
-        <p class="text-lg font-bold text-white mt-1">IA + Clima + Tática</p>
-        <p class="text-xs text-slate-400 mt-2">Análise 100% Automatizada</p>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Banca Atual (R$)</label>
+          <input type="number" id="input-banca" value="500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-white font-bold text-lg focus:outline-none focus:border-emerald-500" oninput="recalcularStakes()">
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Meta Desejada (R$)</label>
+          <input type="number" id="input-meta" value="1500" class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-emerald-400 font-bold text-lg focus:outline-none focus:border-emerald-500" oninput="recalcularStakes()">
+        </div>
+        <div class="flex flex-col justify-center bg-slate-900/60 p-3 rounded-xl border border-slate-800">
+          <span class="text-xs text-slate-400">Lucro Almejado</span>
+          <span id="label-lucro" class="text-xl font-black text-emerald-400">R$ 1.000,00</span>
+        </div>
       </div>
     </div>
 
@@ -60,11 +63,11 @@
     <div class="flex items-center justify-between mb-6">
       <h2 class="text-xl font-bold flex items-center gap-2">
         <i class="fa-solid fa-fire text-amber-500"></i>
-        Análises & Palpites da Rodada
+        Análises do Dia
       </h2>
     </div>
 
-    <!-- Container onde os cards de jogos serão carregados -->
+    <!-- Container dos Jogos -->
     <div id="jogos-container" class="grid grid-cols-1 gap-6">
       <div class="text-center py-12 text-slate-400 card-glass rounded-2xl">
         <i class="fa-solid fa-circle-notch fa-spin text-3xl text-emerald-400 mb-3"></i>
@@ -73,95 +76,122 @@
     </div>
   </main>
 
-  <!-- Script para carregar o JSON gerado pelo Robô -->
   <script>
+    let jogosGlobais = [];
+
     async function carregarAnalises() {
       const container = document.getElementById('jogos-container');
-      try {
-        const resposta = await fetch('dados_jogos_hoje.json?cache=' + new Date().getTime());
-        if (!resposta.ok) throw new Error('Arquivo de análises ainda não gerado');
-        const jogos = await resposta.json();
+      
+      // Múltiplas fontes de redundância para que o navegador consiga ler o JSON no celular sem bloqueio CORS
+      const endpoints = [
+        './dados_jogos_hoje.json?t=' + Date.now(),
+        'dados_jogos_hoje.json?t=' + Date.now()
+      ];
 
-        if (!jogos || jogos.length === 0) {
-          container.innerHTML = `<div class="card-glass p-8 rounded-2xl text-center text-slate-400">Nenhuma análise disponível no momento.</div>`;
-          return;
+      let dadosCarregados = null;
+
+      for (let url of endpoints) {
+        try {
+          const res = await fetch(url);
+          if (res.ok) {
+            dadosCarregados = await res.json();
+            if (dadosCarregados && dadosCarregados.length > 0) break;
+          }
+        } catch (e) {
+          console.error("Erro ao tentar URL:", url);
         }
+      }
 
-        container.innerHTML = ''; // Limpa o carregamento
-
-        jogos.forEach((j, index) => {
-          const cardHtml = `
-            <div class="card-glass rounded-2xl p-6 transition-all duration-300 hover:border-slate-700">
-              <!-- Topo do Card -->
-              <div class="flex flex-wrap justify-between items-start gap-2 border-b border-slate-800 pb-4 mb-4">
-                <div>
-                  <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
-                    ${j.liga || 'Futebol'}
-                  </span>
-                  <h3 class="text-xl font-black text-white mt-2">${j.jogo}</h3>
-                </div>
-                <div class="text-right">
-                  <span class="text-xs text-slate-400 block">Confiança</span>
-                  <span class="text-sm font-bold text-amber-400">${j.nivel_confianca || 'Alta'}</span>
-                </div>
-              </div>
-
-              <!-- Análise Profunda (Grid) -->
-              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 mb-6">
-                <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                  <p class="font-bold text-slate-200 mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-cloud-showers-heavy text-blue-400"></i> Clima & Gramado
-                  </p>
-                  <p class="text-xs text-slate-400 leading-relaxed">${j.clima_e_gramado || 'Condições normais'}</p>
-                </div>
-                
-                <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                  <p class="font-bold text-slate-200 mb-1 flex items-center gap-2">
-                    <i class="fa-solid fa-user-xmark text-rose-400"></i> Desfalques & Tática
-                  </p>
-                  <p class="text-xs text-slate-400 leading-relaxed">${j.desfalques_e_escalacao || 'Sem desfalques graves'}</p>
-                </div>
-              </div>
-
-              <!-- Resumo Técnico -->
-              <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800/80 mb-6">
-                <p class="text-xs font-bold text-slate-300 mb-1">
-                  <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mr-1"></i> Parecer do Analista AI:
-                </p>
-                <p class="text-xs text-slate-400 leading-relaxed">${j.resumo_analise || j.historico_e_momento}</p>
-              </div>
-
-              <!-- Dica de Aposta / Palpite -->
-              <div class="bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/30 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4">
-                <div>
-                  <span class="text-xs text-emerald-400 font-semibold block uppercase">Palpite Recomendado</span>
-                  <span class="text-lg font-black text-white">${j.palpite_recomendado}</span>
-                </div>
-                <div class="flex items-center gap-4">
-                  <div class="text-right">
-                    <span class="text-xs text-slate-400 block">Odd Est.</span>
-                    <span class="text-base font-bold text-emerald-400">${j.odd_estimada || '1.80'}</span>
-                  </div>
-                  <div class="text-right border-l border-slate-800 pl-4">
-                    <span class="text-xs text-slate-400 block">Stake Recom.</span>
-                    <span class="text-base font-bold text-white">${j.stake_sugerida_reais || 'R$ 50,00'}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          `;
-          container.innerHTML += cardHtml;
-        });
-
-      } catch (erro) {
+      if (dadosCarregados && dadosCarregados.length > 0) {
+        jogosGlobais = dadosCarregados;
+        renderizarJogos();
+      } else {
         container.innerHTML = `
           <div class="card-glass p-8 rounded-2xl text-center">
-            <i class="fa-solid fa-triangle-exclamation text-amber-400 text-3xl mb-3"></i>
-            <p class="text-slate-300 font-bold">Ainda não há análises geradas para hoje.</p>
-            <p class="text-xs text-slate-500 mt-1">O robô roda automaticamente todos os dias às 07:00 da manhã.</p>
+            <i class="fa-solid fa-clock-rotate-left text-emerald-400 text-3xl mb-3"></i>
+            <p class="text-slate-200 font-bold text-base">O robô está finalizando as análises de hoje!</p>
+            <p class="text-xs text-slate-400 mt-2">Clique no botão da aba <b>Actions -> Run workflow</b> no seu GitHub para gerar as análises deste repositório agora mesmo.</p>
           </div>
         `;
       }
+    }
+
+    function recalcularStakes() {
+      const banca = parseFloat(document.getElementById('input-banca').value) || 0;
+      const meta = parseFloat(document.getElementById('input-meta').value) || 0;
+      const lucro = meta - banca;
+      
+      document.getElementById('label-lucro').innerText = 'R$ ' + (lucro > 0 ? lucro : 0).toFixed(2);
+      renderizarJogos();
+    }
+
+    function renderizarJogos() {
+      const container = document.getElementById('jogos-container');
+      const banca = parseFloat(document.getElementById('input-banca').value) || 500;
+      container.innerHTML = '';
+
+      jogosGlobais.forEach((j) => {
+        let percentual = j.nivel_confianca === 'Alta' ? 0.12 : (j.nivel_confianca === 'Muito Alto' ? 0.15 : 0.08);
+        let stakeCalculada = (banca * percentual).toFixed(2);
+
+        const cardHtml = `
+          <div class="card-glass rounded-2xl p-6 transition-all duration-300 hover:border-slate-700">
+            <div class="flex flex-wrap justify-between items-start gap-2 border-b border-slate-800 pb-4 mb-4">
+              <div>
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider bg-emerald-500/10 px-2.5 py-1 rounded-md border border-emerald-500/20">
+                  ${j.liga || 'Futebol'}
+                </span>
+                <h3 class="text-xl font-black text-white mt-2">${j.jogo}</h3>
+              </div>
+              <div class="text-right">
+                <span class="text-xs text-slate-400 block">Confiança</span>
+                <span class="text-sm font-bold text-amber-400">${j.nivel_confianca || 'Alta'}</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 mb-6">
+              <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                <p class="font-bold text-slate-200 mb-1 flex items-center gap-2">
+                  <i class="fa-solid fa-cloud-showers-heavy text-blue-400"></i> Clima & Gramado
+                </p>
+                <p class="text-xs text-slate-400 leading-relaxed">${j.clima_e_gramado || 'Condições normais'}</p>
+              </div>
+              
+              <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                <p class="font-bold text-slate-200 mb-1 flex items-center gap-2">
+                  <i class="fa-solid fa-user-xmark text-rose-400"></i> Desfalques & Tática
+                </p>
+                <p class="text-xs text-slate-400 leading-relaxed">${j.desfalques_e_escalacao || 'Sem desfalques graves'}</p>
+              </div>
+            </div>
+
+            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800/80 mb-6">
+              <p class="text-xs font-bold text-slate-300 mb-1">
+                <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 mr-1"></i> Parecer do Analista AI:
+              </p>
+              <p class="text-xs text-slate-400 leading-relaxed">${j.resumo_analise || j.historico_e_momento}</p>
+            </div>
+
+            <div class="bg-gradient-to-r from-emerald-950/40 to-slate-900 border border-emerald-500/30 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4">
+              <div>
+                <span class="text-xs text-emerald-400 font-semibold block uppercase">Palpite Recomendado</span>
+                <span class="text-lg font-black text-white">${j.palpite_recomendado}</span>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="text-right">
+                  <span class="text-xs text-slate-400 block">Odd Est.</span>
+                  <span class="text-base font-bold text-emerald-400">${j.odd_estimada || '1.80'}</span>
+                </div>
+                <div class="text-right border-l border-slate-800 pl-4">
+                  <span class="text-xs text-slate-400 block">Entrada Sugerida</span>
+                  <span class="text-base font-bold text-white">R$ ${stakeCalculada}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        container.innerHTML += cardHtml;
+      });
     }
 
     carregarAnalises();
