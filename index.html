@@ -3,117 +3,138 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Analista AI Pro | Gestão & Palpites Esportivos</title>
+  <title>SofaAnalytics | Inteligência Esportiva & Apostas</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&display=swap');
-    body { 
-      background: linear-gradient(135deg, #0b132b 0%, #1c2541 100%);
-      color: #f8fafc; 
-      font-family: 'Inter', sans-serif; 
-      min-height: 100vh;
-    }
-    .card-glass { 
-      background: rgba(30, 41, 59, 0.75); 
-      backdrop-filter: blur(16px); 
-      border: 1px solid rgba(255, 255, 255, 0.08); 
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
-    }
-    .accent-gradient {
-      background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
-    }
+    body { background-color: #f1f5f9; color: #0f172a; font-family: system-ui, -apple-system, sans-serif; }
+    .card-sofa-light { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+    .header-blue { background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%); }
+    .btn-filter { transition: all 0.2s ease-in-out; }
+    .btn-filter.active { background-color: #2563eb; color: #ffffff; border-color: #1d4ed8; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3); }
   </style>
 </head>
-<body class="pb-16">
+<body class="min-h-screen pb-16">
 
-  <!-- Header Topo -->
-  <header class="border-b border-slate-700/50 bg-slate-900/90 sticky top-0 z-50 backdrop-blur-md px-4 py-4">
-    <div class="max-w-5xl mx-auto flex justify-between items-center">
+  <!-- Header Estilo App SofaScore Claro -->
+  <header class="header-blue text-white sticky top-0 z-50 px-4 py-3.5 shadow-md">
+    <div class="max-w-4xl mx-auto flex justify-between items-center">
       <div class="flex items-center gap-3">
-        <div class="accent-gradient p-2.5 rounded-xl text-slate-950 font-black shadow-lg shadow-amber-500/20">
-          <i class="fa-solid fa-chart-line text-xl"></i>
+        <div class="bg-white/20 p-2 rounded-xl text-white font-black backdrop-blur-sm">
+          <i class="fa-solid fa-chart-simple text-xl"></i>
         </div>
         <div>
-          <h1 class="font-extrabold text-xl tracking-tight leading-tight text-white">Analista AI <span class="text-amber-400">Pro</span></h1>
-          <p class="text-xs text-slate-400 font-medium">Análises de Precisão & Gestão de Stake</p>
+          <h1 class="font-extrabold text-base tracking-wider text-white">SOFA<span class="text-sky-200">ANALYTICS</span></h1>
+          <p class="text-[11px] text-blue-100">Análises Táticas & Gestão de Apostas</p>
         </div>
       </div>
-      <div>
-        <span class="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-400 text-xs px-3 py-1.5 rounded-full border border-emerald-500/30 font-bold">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-          Jogos de Hoje
-        </span>
+      <div class="flex items-center gap-2 bg-white/20 text-white px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Ao Vivo
       </div>
     </div>
   </header>
 
-  <main class="max-w-5xl mx-auto px-4 mt-6">
+  <main class="max-w-4xl mx-auto px-4 mt-5">
     
-    <!-- CALCULADORA DE BANCA -->
-    <div class="card-glass p-6 rounded-2xl mb-8 border-amber-500/30">
-      <div class="flex items-center gap-2 mb-4">
-        <i class="fa-solid fa-calculator text-amber-400 text-lg"></i>
-        <h2 class="text-base font-bold text-white uppercase tracking-wider">Calculadora Inteligente de Stake</h2>
+    <!-- CALCULADORA DE BANCA (Modo Claro) -->
+    <div class="card-sofa-light p-5 mb-5">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-2.5 mb-3.5">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-calculator text-blue-600"></i>
+          <h2 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Gestão Personalizada de Banca</h2>
+        </div>
+        <span class="text-[10px] text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-medium">Calculadora Automática</span>
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Banca Atual (R$)</label>
-          <input type="number" id="input-banca" value="500" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-4 py-2.5 text-white font-bold text-lg focus:outline-none focus:border-amber-400 transition" oninput="recalcularStakes()">
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Banca Atual (R$)</label>
+          <input type="number" id="input-banca" value="500" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-slate-900 font-bold text-sm focus:outline-none focus:border-blue-600" oninput="recalcularStakes()">
         </div>
         <div>
-          <label class="block text-xs font-semibold text-slate-400 mb-1">Sua Meta do Dia (R$)</label>
-          <input type="number" id="input-meta" value="1000" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-4 py-2.5 text-amber-400 font-bold text-lg focus:outline-none focus:border-amber-400 transition" oninput="recalcularStakes()">
+          <label class="block text-xs font-semibold text-slate-500 mb-1">Meta Desejada (R$)</label>
+          <input type="number" id="input-meta" value="1500" class="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2 text-blue-600 font-bold text-sm focus:outline-none focus:border-blue-600" oninput="recalcularStakes()">
         </div>
-        <div class="flex flex-col justify-center bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-          <span class="text-xs text-slate-400 font-medium">Meta de Lucro</span>
-          <span id="label-lucro" class="text-2xl font-black text-emerald-400">R$ 500,00</span>
+        <div class="flex flex-col justify-center bg-blue-50/60 p-3 rounded-xl border border-blue-100">
+          <span class="text-[11px] text-blue-600 font-semibold">Lucro Almejado</span>
+          <span id="label-lucro" class="text-base font-black text-emerald-600">R$ 1.000,00</span>
         </div>
       </div>
     </div>
 
-    <!-- Título Seção -->
-    <div class="flex items-center justify-between mb-6">
-      <h2 class="text-xl font-black text-white flex items-center gap-2">
-        <i class="fa-solid fa-fire text-amber-500 animate-bounce"></i>
-        Análises da Rodada
-      </h2>
+    <!-- PESQUISA & BARRA DE FILTROS POR ESPORTE -->
+    <div class="space-y-3 mb-5">
+      <div class="relative">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+        <input type="text" id="input-busca" placeholder="Buscar por equipa, liga ou esporte..." class="w-full bg-white border border-slate-200 shadow-sm rounded-xl pl-9 pr-4 py-2 text-xs text-slate-800 placeholder-slate-400 focus:outline-none focus:border-blue-600" oninput="renderizarJogos()">
+      </div>
+
+      <div class="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
+        <button onclick="filtrarEsporte('Todos')" id="btn-Todos" class="btn-filter active px-3.5 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 bg-white shadow-sm whitespace-nowrap">
+          <i class="fa-solid fa-globe mr-1"></i> Todos (<span id="count-todos">0</span>)
+        </button>
+        <button onclick="filtrarEsporte('Futebol')" id="btn-Futebol" class="btn-filter px-3.5 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 bg-white shadow-sm whitespace-nowrap">
+          <i class="fa-solid fa-futbol mr-1 text-blue-600"></i> Futebol (<span id="count-futebol">0</span>)
+        </button>
+        <button onclick="filtrarEsporte('Basquete')" id="btn-Basquete" class="btn-filter px-3.5 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 bg-white shadow-sm whitespace-nowrap">
+          <i class="fa-solid fa-basketball mr-1 text-amber-500"></i> WNBA / Basquete (<span id="count-basquete">0</span>)
+        </button>
+        <button onclick="filtrarEsporte('Beisebol')" id="btn-Beisebol" class="btn-filter px-3.5 py-1.5 rounded-full border border-slate-200 text-xs font-bold text-slate-600 bg-white shadow-sm whitespace-nowrap">
+          <i class="fa-solid fa-baseball mr-1 text-rose-500"></i> MLB / Beisebol (<span id="count-beisebol">0</span>)
+        </button>
+      </div>
     </div>
 
     <!-- Container dos Jogos -->
-    <div id="jogos-container" class="grid grid-cols-1 gap-6">
-      <div class="text-center py-12 text-slate-400 card-glass rounded-2xl">
-        <i class="fa-solid fa-circle-notch fa-spin text-3xl text-amber-400 mb-3"></i>
-        <p>Buscando os palpites de hoje...</p>
+    <div id="jogos-container" class="space-y-4">
+      <div class="text-center py-12 card-sofa-light text-slate-400">
+        <i class="fa-solid fa-circle-notch fa-spin text-2xl text-blue-600 mb-2"></i>
+        <p class="text-xs">A carregar análises táticas do SofaScore...</p>
       </div>
     </div>
   </main>
 
   <script>
     let jogosGlobais = [];
+    let esporteAtual = 'Todos';
 
     async function carregarAnalises() {
       const container = document.getElementById('jogos-container');
       try {
-        const res = await fetch('dados_jogos_hoje.json?v=' + Date.now());
+        const res = await fetch('dados_jogos_hoje.json?v=' + new Date().getTime());
         if (!res.ok) throw new Error();
         jogosGlobais = await res.json();
-        
+
         if (!jogosGlobais || jogosGlobais.length === 0) {
-          container.innerHTML = `<div class="card-glass p-8 rounded-2xl text-center text-slate-400">Aguardando atualizações do robô.</div>`;
+          container.innerHTML = `<div class="card-sofa-light p-6 text-center text-slate-500 text-xs">Nenhum evento esportivo encontrado no banco de dados.</div>`;
           return;
         }
+
+        atualizarContadores();
         renderizarJogos();
       } catch (e) {
         container.innerHTML = `
-          <div class="card-glass p-8 rounded-2xl text-center">
-            <i class="fa-solid fa-clock text-amber-400 text-3xl mb-3"></i>
-            <p class="text-slate-200 font-bold">O robô está processando as análises de hoje.</p>
-            <p class="text-xs text-slate-400 mt-1">Atualize a página em instantes.</p>
-          </div>
-        `;
+          <div class="card-sofa-light p-6 text-center">
+            <i class="fa-solid fa-rotate text-blue-600 text-2xl mb-2"></i>
+            <p class="text-slate-800 font-bold text-sm">Atualizando dados do SofaScore...</p>
+            <p class="text-xs text-slate-500 mt-1">Acesse a aba <b>Actions -> Run workflow</b> no GitHub para publicar.</p>
+          </div>`;
       }
+    }
+
+    function atualizarContadores() {
+      document.getElementById('count-todos').innerText = jogosGlobais.length;
+      document.getElementById('count-futebol').innerText = jogosGlobais.filter(j => j.esporte === 'Futebol').length;
+      document.getElementById('count-basquete').innerText = jogosGlobais.filter(j => j.esporte === 'Basquete').length;
+      document.getElementById('count-beisebol').innerText = jogosGlobais.filter(j => j.esporte === 'Beisebol').length;
+    }
+
+    function filtrarEsporte(esporte) {
+      esporteAtual = esporte;
+      document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
+      document.getElementById('btn-' + esporte).classList.add('active');
+      renderizarJogos();
     }
 
     function recalcularStakes() {
@@ -127,66 +148,108 @@
     function renderizarJogos() {
       const container = document.getElementById('jogos-container');
       const banca = parseFloat(document.getElementById('input-banca').value) || 500;
+      const termoBusca = (document.getElementById('input-busca').value || '').toLowerCase();
+      
       container.innerHTML = '';
 
-      jogosGlobais.forEach((j) => {
-        let percentual = j.nivel_confianca === 'Alta' ? 0.10 : 0.05;
+      let jogosFiltrados = esporteAtual === 'Todos' 
+        ? jogosGlobais 
+        : jogosGlobais.filter(j => (j.esporte || 'Futebol') === esporteAtual);
+
+      if (termoBusca) {
+        jogosFiltrados = jogosFiltrados.filter(j => 
+          j.jogo.toLowerCase().includes(termoBusca) || 
+          j.liga.toLowerCase().includes(termoBusca)
+        );
+      }
+
+      if (jogosFiltrados.length === 0) {
+        container.innerHTML = `<div class="card-sofa-light p-6 text-center text-slate-500 text-xs">Nenhum evento encontrado para esta pesquisa.</div>`;
+        return;
+      }
+
+      jogosFiltrados.forEach((j) => {
+        let percentual = 0.10;
         let stakeCalculada = (banca * percentual).toFixed(2);
 
+        let iconeEsporte = 'fa-futbol text-blue-600';
+        if (j.esporte === 'Basquete') iconeEsporte = 'fa-basketball text-amber-500';
+        if (j.esporte === 'Beisebol') iconeEsporte = 'fa-baseball text-rose-500';
+
         const cardHtml = `
-          <div class="card-glass rounded-2xl p-6 hover:border-amber-500/40 transition duration-300">
-            <div class="flex flex-wrap justify-between items-start gap-2 border-b border-slate-700/60 pb-4 mb-4">
-              <div>
-                <span class="text-[10px] font-black text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
-                  ${j.liga || 'Futebol'}
-                </span>
-                <h3 class="text-xl font-black text-white mt-2">${j.jogo}</h3>
+          <div class="card-sofa-light p-4 space-y-3.5 hover:shadow-md transition-all">
+            
+            <!-- Liga & Horário -->
+            <div class="flex justify-between items-center border-b border-slate-100 pb-2.5">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200 flex items-center gap-1.5">
+                <i class="fa-solid ${iconeEsporte}"></i> ${j.liga}
+              </span>
+              <span class="text-xs font-bold text-slate-500">
+                <i class="fa-regular fa-clock mr-1 text-blue-600"></i> ${j.horario || 'Hoje'}
+              </span>
+            </div>
+
+            <!-- Confronto -->
+            <div class="text-center py-0.5">
+              <h3 class="text-base font-black text-slate-900 tracking-wide">${j.jogo}</h3>
+            </div>
+
+            <!-- BARRAS DE PROBABILIDADE SOFASCORE CLARO -->
+            <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+              <div class="flex justify-between text-[10px] font-bold text-slate-600 mb-1">
+                <span>Mandante: ${j.prob_casa || 45}%</span>
+                <span>${j.esporte === 'Futebol' ? 'Empate: ' + (j.prob_empate || 25) + '%' : 'Equilíbrio'}</span>
+                <span>Visitante: ${j.prob_fora || 30}%</span>
               </div>
-              <div class="text-right">
-                <span class="text-xs text-slate-400 block font-medium">Confiança</span>
-                <span class="text-sm font-black text-emerald-400">${j.nivel_confianca || 'Alta'}</span>
+              <div class="w-full h-2 bg-slate-200 rounded-full flex overflow-hidden">
+                <div style="width: ${j.prob_casa || 45}%" class="bg-blue-600"></div>
+                <div style="width: ${j.prob_empate || 25}%" class="bg-slate-400"></div>
+                <div style="width: ${j.prob_fora || 30}%" class="bg-emerald-500"></div>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-300 mb-5">
-              <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800">
-                <p class="font-bold text-amber-400 mb-1 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="fa-solid fa-cloud-sun-rain"></i> Clima & Gramado
+            <!-- Informações Táticas -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 text-xs">
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                <p class="font-bold text-slate-800 mb-0.5 flex items-center gap-1.5 text-[11px]">
+                  <i class="fa-solid fa-stadium text-blue-600"></i> Ambiente & Contexto
                 </p>
-                <p class="text-xs text-slate-300 leading-relaxed">${j.clima_e_gramado}</p>
+                <p class="text-slate-600 text-[10px] leading-relaxed">${j.clima_e_gramado}</p>
               </div>
-              
-              <div class="bg-slate-950/40 p-4 rounded-xl border border-slate-800">
-                <p class="font-bold text-amber-400 mb-1 text-xs uppercase tracking-wider flex items-center gap-1.5">
-                  <i class="fa-solid fa-users-slash"></i> Desfalques & Tática
+              <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                <p class="font-bold text-slate-800 mb-0.5 flex items-center gap-1.5 text-[11px]">
+                  <i class="fa-solid fa-users text-purple-600"></i> Elenco & Destaques
                 </p>
-                <p class="text-xs text-slate-300 leading-relaxed">${j.desfalques_e_escalacao}</p>
+                <p class="text-slate-600 text-[10px] leading-relaxed">${j.desfalques_e_escalacao}</p>
               </div>
             </div>
 
-            <div class="bg-slate-950/30 p-4 rounded-xl border border-slate-800/80 mb-5">
-              <p class="text-xs font-bold text-slate-300 mb-1 flex items-center gap-1.5">
-                <i class="fa-solid fa-robot text-amber-400"></i> Parecer do Analista AI:
+            <!-- Parecer do Analista -->
+            <div class="bg-blue-50/40 p-2.5 rounded-xl border border-blue-100">
+              <p class="text-[10px] font-bold text-blue-900 mb-0.5 flex items-center gap-1.5">
+                <i class="fa-solid fa-brain text-blue-600"></i> Parecer Tático AI:
               </p>
-              <p class="text-xs text-slate-400 leading-relaxed">${j.resumo_analise}</p>
+              <p class="text-[10px] text-slate-700 leading-relaxed">${j.resumo_analise || j.historico_e_momento}</p>
             </div>
 
-            <div class="bg-gradient-to-r from-slate-900 to-slate-950 border border-amber-500/40 rounded-xl p-4 flex flex-wrap justify-between items-center gap-4">
+            <!-- Entrada Recomendada -->
+            <div class="bg-gradient-to-r from-blue-50 via-slate-50 to-emerald-50 border border-blue-200 rounded-xl p-3 flex flex-wrap justify-between items-center gap-2">
               <div>
-                <span class="text-[10px] text-amber-400 font-bold block uppercase tracking-wider">Palpite Recomendado</span>
-                <span class="text-lg font-black text-white">${j.palpite_recomendado}</span>
+                <span class="text-[9px] text-blue-600 uppercase font-bold block tracking-wider">Palpite Recomendado</span>
+                <span class="text-sm font-black text-slate-900">${j.palpite_recomendado}</span>
               </div>
-              <div class="flex items-center gap-4">
+              <div class="flex items-center gap-3">
                 <div class="text-right">
-                  <span class="text-[10px] text-slate-400 block font-medium">Odd Est.</span>
-                  <span class="text-base font-black text-amber-400">${j.odd_estimada || '1.80'}</span>
+                  <span class="text-[9px] text-slate-500 block uppercase font-medium">Odd Est.</span>
+                  <span class="text-xs font-bold text-amber-600">${j.odd_estimada || '1.80'}</span>
                 </div>
-                <div class="text-right border-l border-slate-800 pl-4">
-                  <span class="text-[10px] text-slate-400 block font-medium">Entrada Sugerida</span>
-                  <span class="text-base font-black text-emerald-400">R$ ${stakeCalculada}</span>
+                <div class="text-right border-l border-slate-200 pl-3">
+                  <span class="text-[9px] text-slate-500 block uppercase font-medium">Sugestão</span>
+                  <span class="text-xs font-bold text-emerald-600">R$ ${stakeCalculada}</span>
                 </div>
               </div>
             </div>
+
           </div>
         `;
         container.innerHTML += cardHtml;
@@ -197,3 +260,4 @@
   </script>
 </body>
 </html>
+
