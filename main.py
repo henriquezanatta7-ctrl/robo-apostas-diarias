@@ -1,85 +1,110 @@
 import os
 import json
+import requests
+from datetime import datetime
 import google.generativeai as genai
 
-# Configuração da API do Gemini via variável de ambiente segura
+# Configuração das Chaves
 GEMINI_KEY = os.environ.get("GEMINI_API_KEY")
-if not GEMINI_KEY:
-    raise ValueError("Chave GEMINI_API_KEY não encontrada nas configurações!")
+FOOTBALL_KEY = os.environ.get("FOOTBALL_API_KEY")
+
+if not GEMINI_KEY or not FOOTBALL_KEY:
+    raise ValueError("Chaves GEMINI_API_KEY ou FOOTBALL_API_KEY nao encontradas!")
 
 genai.configure(api_key=GEMINI_KEY)
-
-# Modelo utilizado para análises rápidas e eficientes
 model = genai.GenerativeModel('gemini-1.5-flash')
 
-def gerar_analise_profunda_do_jogo(jogo, liga, horario, odds_base):
+def buscar_jogos_do_dia():
     """
-    Função que solicita à IA uma análise minuciosa com fatores externos
-    (clima, desfalques, estado do gramado, momento tático).
+    Busca os jogos do dia atual na API Esportiva
     """
+    hoje = datetime.now().strftime('%Y-%m-%d')
+    url = "https://api-football-v1.p.rapidapi.com/v3/fixtures"
+    
+    # Exemplo buscando ligas principais (Brasileirão = 71, Libertadores = 13, Sul-Americana = 11)
+    headers = {
+        "X-RapidAPI-Key": FOOTBALL_KEY,
+        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
+    }
+    
+    # Consulta os jogos agendados para hoje
+    params = {"date": hoje, "timezone": "America/Sao_Paulo"}
+    
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        dados = response.json()
+        
+        jogos_filtrados = []
+        for item in dados.get("response", [])[:10]:  # Limita aos 10 primeiros jogos do dia
+            fixture = item.get("fixture", {})
+            league = item.get("league", {})
+            teams = item.get("teams", {})
+            
+            nome_jogo = f"{teams.get('home', {}).get('name')} vs {teams.get('away', {}).get('name')}"
+            nome_liga = league.get("name")
+            horario = fixture.get("date", "")[11:16] # Extrai apenas Hora:Minuto
+            
+            jogos_filtrados.append({
+                "jogo": nome_jogo,
+                "liga": nome_liga,
+                "horario": horario,
+                "odds": "Odds de mercado em tempo real"
+            })
+            
+        return jogos_filtrados
+    except Exception as e:
+        print(f"Erro ao buscar jogos na API: {e}")
+        return []
+
+def gerar_analise(jogo, liga, horario, odds):
     prompt = f"""
-    Você é um analista profissional de apostas esportivas e estatístico sênior.
-    Analise o seguinte confronto para hoje de forma extremamente aprofundada:
-    
-    - Partida: {jogo}
-    - Liga/Campeonato: {liga}
+    Você é um analista esportivo profissional. Analise o confronto:
+    - Jogo: {jogo}
+    - Liga: {liga}
     - Horário: {horario}
-    - Odds de Referência: {odds_base}
     
-    Crie um relatório completo estruturado exatamente em formato JSON com as seguintes chaves:
+    Retorne EXCLUSIVAMENTE um JSON válido com exatamente estas chaves:
     {{
       "jogo": "{jogo}",
       "liga": "{liga}",
-      "clima_e_gramado": "Detalhamento das condições climáticas previstas (chuva, vento, temperatura) e o impacto direto no ritmo do jogo ou tendência de gols",
-      "desfalques_e_escalacao": "Análise de desfalques importantes, peças-chave e como isso afeta a tática dos times",
-      "historico_e_momento": "Momento recente das equipes, sequência de resultados e retrospecto direto",
-      "palpite_recomendado": "Nome do mercado específico recomendado (ex: Flamengo ML, Ambas Marcam Não, Under 2.5)",
-      "odd_estimada": "Cotação estimada do palpite (ex: 1.85)",
-      "nivel_confianca": "Alta, Média ou Ousada",
-      "stake_sugerida_reais": "Valor em R$ recomendado para este jogo baseado numa banca de R$ 550 com objetivo de R$ 1.700",
-      "resumo_analise": "Justificativa tática e minuciosa conectando clima + desfalques + estatística para provar o valor do palpite"
+      "clima_e_gramado": "Análise prevista das condições do clima/gramado para este jogo hoje e como afeta a tendência de gols",
+      "desfalques_e_escalacao": "Principais desfalques recentes e contexto tático das equipes",
+      "historico_e_momento": "Fase recente e histórico direto das equipes",
+      "palpite_recomendado": "Mercado sugerido para aposta de valor",
+      "odd_estimada": "Odd aproximada para este mercado (ex: 1.85)",
+      "nivel_confianca": "Alta, Média ou Muito Alto",
+      "resumo_analise": "Justificativa tática aprofundada baseada em momento e estatística"
     }}
-    
-    Responda EXCLUSIVAMENTE o código JSON válido, sem texto explicativo adicional fora do JSON.
     """
-    
     try:
-        response = model.generate_content(prompt)
-        # Limpa possíveis formatações de markdown na resposta da IA
-        texto_limpo = response.text.replace("```json", "").replace("```", "").strip()
-        return json.loads(texto_limpo)
+        res = model.generate_content(prompt)
+        txt = res.text.replace("```json", "").replace("```", "").strip()
+        return json.loads(txt)
     except Exception as e:
-        print(f"Erro ao processar análise para {jogo}: {e}")
+        print(f"Erro ao analisar {jogo}: {e}")
         return None
 
 def main():
-    print("🚀 Iniciando o Robô de Análise Esportiva Profunda...")
+    print("🚀 Buscando lista de jogos de hoje na API Esportiva...")
+    jogos = buscar_jogos_do_dia()
     
-    # Exemplo de grade diária (Na Fase 2, estes jogos virão automaticamente da API da Betano/Flashscore)
-    jogos_hoje = [
-        {"jogo": "Flamengo vs Chapecoense", "liga": "Brasileirão Série A", "horario": "21:30", "odds": "Fla 1.55 / Empate 3.80 / Chape 6.50"},
-        {"jogo": "Coritiba vs Palmeiras", "liga": "Brasileirão Série A", "horario": "19:30", "odds": "Coxa 3.60 / Empate 3.40 / Verdão 2.10"},
-        {"jogo": "Ind. Medellín vs Vasco", "liga": "Copa Sul-Americana", "horario": "19:00", "odds": "DIM 2.10 / Empate 3.20 / Vasco 3.50"}
-    ]
-    
-    relatorio_diario = []
-    
-    for partida in jogos_hoje:
-        print(f"🔍 Analisando: {partida['jogo']}...")
-        analise = gerar_analise_profunda_do_jogo(
-            jogo=partida["jogo"],
-            liga=partida["liga"],
-            horario=partida["horario"],
-            odds_base=partida["odds"]
-        )
-        if analise:
-            relatorio_diario.append(analise)
-            
-    # Salva o arquivo JSON com todas as análises prontas para o site consumir
-    with open("dados_jogos_hoje.json", "w", encoding="utf-8") as f:
-        json.dump(relatorio_diario, f, ensure_ascii=False, indent=2)
+    if not jogos:
+        print("Nenhum jogo encontrado para hoje ou limite da API atingido. Usando dados de segurança.")
+        jogos = [
+            {"jogo": "Flamengo vs Fluminense", "liga": "Brasileirão", "horario": "20:00", "odds": "1.90 / 3.40 / 3.80"}
+        ]
         
-    print("✅ Relatório de análises gerado com sucesso em 'dados_jogos_hoje.json'!")
+    relatorio = []
+    for j in jogos:
+        print(f"Gerando análise da IA para: {j['jogo']}...")
+        res = gerar_analise(j["jogo"], j["liga"], j["horario"], j["odds"])
+        if res:
+            relatorio.append(res)
+            
+    with open("dados_jogos_hoje.json", "w", encoding="utf-8") as f:
+        json.dump(relatorio, f, ensure_ascii=False, indent=2)
+        
+    print("✅ Processo concluído com sucesso!")
 
 if __name__ == "__main__":
     main()
