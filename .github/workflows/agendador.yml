@@ -27,7 +27,9 @@ jobs:
     - name: Executar Robô de Análise
       env:
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      run: |
+        FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+      run: python main.py
+|
         python main.py
 
     - name: Salvar Dados Atualizados no GitHub
