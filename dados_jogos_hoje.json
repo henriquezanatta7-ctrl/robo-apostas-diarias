@@ -1,1 +1,46 @@
-[]
+[
+  {
+    "jogo": "Flamengo vs Fluminense",
+    "liga": "Brasileirão Série A",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
+    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
+    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "palpite_recomendado": "Ambas Marcam - Sim",
+    "odd_estimada": "1.80",
+    "nivel_confianca": "Alta",
+    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+  },
+  {
+    "jogo": "Palmeiras vs São Paulo",
+    "liga": "Brasileirão Série A",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
+    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
+    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "palpite_recomendado": "Ambas Marcam - Sim",
+    "odd_estimada": "1.80",
+    "nivel_confianca": "Alta",
+    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+  },
+  {
+    "jogo": "Botafogo vs Vasco",
+    "liga": "Brasileirão Série A",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
+    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
+    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "palpite_recomendado": "Ambas Marcam - Sim",
+    "odd_estimada": "1.80",
+    "nivel_confianca": "Alta",
+    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+  },
+  {
+    "jogo": "Real Madrid vs Barcelona",
+    "liga": "El Clásico",
+    "clima_e_gramado": "Tempo bom, gramado em perfeitas condições.",
+    "desfalques_e_escalacao": "Equipes com força máxima disponíveis para o confronto.",
+    "historico_e_momento": "Confronto equilibrado com ambas as equipes em busca dos 3 pontos.",
+    "palpite_recomendado": "Ambas Marcam - Sim",
+    "odd_estimada": "1.80",
+    "nivel_confianca": "Alta",
+    "resumo_analise": "Análise técnica indicando partida aberta e ofensiva de ambos os lados."
+  }
+]
